@@ -14,8 +14,12 @@ function Ships() {
 
         isSunk: function () {
             if (this.ship.length === this.ship.hit) {
-                this.ship.isSunk = true,
+                this.ship.isSunk = true;
           }  
         }
     }
+}
+
+function Gameboard() {
+    
 }
