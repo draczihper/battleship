@@ -10,6 +10,12 @@ function Ships() {
         
         hit: function () {
             return this.ship.hit++;
+        },
+
+        isSunk: function () {
+            if (this.ship.length === this.ship.hit) {
+                this.ship.isSunk = true,
+          }  
         }
     }
 }
