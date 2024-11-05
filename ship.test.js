@@ -1,4 +1,4 @@
-const { submarineHits, carrier, battleship, submarine, destroyer, cruiser, submarineHits } = require("./ship.js");
+const { carrier, battleship, submarine, destroyer, cruiser } = require("./ship.js");
 
 describe("ships factory test", () => {
   test("creates carrier object", () => {
@@ -37,10 +37,15 @@ describe("ships factory test", () => {
     });
   });
   test("increments number of hits", () => {
-    expect(submarineHits).toEqual(1)
-  });
-  test("increments number of hits", () => {
-    expect(submarineHits).toEqual(2)
+    const hit = (type) => {
+      let totalHits = type.hits++
+      return totalHits;
+    }
+
+    hit(carrier)
+    hit(carrier)
+    hit(carrier)
+    expect(carrier.hits).toEqual(3)
   });
 });
 
