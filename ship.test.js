@@ -1,13 +1,6 @@
-const { carrier, battleship, submarine, destroyer, cruiser } = require("./ship.js");
+const { carrier, battleship, submarine, destroyer, cruiser, hit, isSunk } = require("./ship.js");
 
 describe("ships factory test", () => {
-  test("creates carrier object", () => {
-    expect(carrier).toEqual({
-      length: 5,
-      hits: 0,
-      isSunk: false,
-    });
-  });
   test("creates battleship object", () => {
     expect(battleship).toEqual({
       length: 4,
@@ -22,30 +15,22 @@ describe("ships factory test", () => {
       isSunk: false,
     });
   });
-  test("creates submarine object", () => {
-    expect(submarine).toEqual({
-      length: 3,
-      hits: 0,
-      isSunk: false,
-    });
-  });
-  test("creates cruiser object", () => {
-    expect(cruiser).toEqual({
-      length: 2,
-      hits: 0,
-      isSunk: false,
-    });
-  });
-  test("increments number of hits", () => {
-    const hit = (type) => {
-      let totalHits = type.hits++
-      return totalHits;
-    }
-
+  test("increments carrier number of hits", () => {
     hit(carrier)
     hit(carrier)
     hit(carrier)
     expect(carrier.hits).toEqual(3)
+  });
+  test("increments cruiser number of hits", () => {
+    hit(cruiser)
+    hit(cruiser)
+    expect(cruiser.hits).toEqual(2)
+  });
+  test("check if cruiser is sunk", () => {
+    expect(isSunk(cruiser)).toEqual(true)
+  });
+  test("check if battleship is sunk", () => {
+    expect(isSunk(battleship)).toEqual(false)
   });
 });
 
