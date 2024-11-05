@@ -13,17 +13,15 @@ const destroyer = Ship(3, 0, false);
 const cruiser = Ship(2, 0, false);
 
 function hit(type) {
-  return type.hits + 1;
+  let totalHits = type.hits++;
+  return totalHits;
 }
 
-let submarineHits = hit(submarine);
-
 module.exports = {
-  submarineHits,
   carrier,
   battleship,
   submarine,
   destroyer,
   cruiser,
-  
+  hit, 
 }
