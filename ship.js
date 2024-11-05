@@ -17,6 +17,14 @@ function hit(type) {
   return totalHits;
 }
 
+function isSunk(type) {
+  if (type.length === type.hits) {
+    return true;
+  } else {
+    return false;
+  }
+}
+
 module.exports = {
   carrier,
   battleship,
@@ -24,4 +32,5 @@ module.exports = {
   destroyer,
   cruiser,
   hit, 
+  isSunk,
 }
