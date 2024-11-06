@@ -25,6 +25,15 @@ function isSunk(type) {
   }
 }
 
+function Gameboard() {
+  const BOARD_SIZE = 10
+  //Game board (ten by ten grid)
+
+
+
+  // Random coordinates in a ten by ten grid
+}
+
 module.exports = {
   carrier,
   battleship,
