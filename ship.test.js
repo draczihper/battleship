@@ -37,13 +37,21 @@ describe("ships factory test", () => {
 
 describe("game board factory test", () => {
   test("place the ship at a coordinate", () => {
-    function placeShip(x, y, length, orientation) {
-      const grid = Array.from({ length: 10 }, () => Array(10).fill(".")
-      
+    function placeShip(shipX, shipY, shipLength, orientation) {
 
-        
-      );
+      const grid = Array.from({ length: 10 }, () => Array(10).fill("."))
+    
+
+        if (orientation === "horizontal" && x + length <= 10) {
+          for (let i = 0; i < length; i++){
+            grid[shipY][shipX + i] = "0";
+          }
+        } else if (orientaton === "vertical" && y + shipLength <= 10) {
+          for (let i = 0; i <= length; i++){
+
+            grid[shipY + i][shipX] = "0";
+          }
+        }
     }
   });
-
 });
