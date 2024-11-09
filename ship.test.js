@@ -42,12 +42,12 @@ describe("game board factory test", () => {
       const grid = Array.from({ length: 10 }, () => Array(10).fill("."))
     
 
-        if (orientation === "horizontal" && x + length <= 10) {
-          for (let i = 0; i < length; i++){
+        if (orientation === "horizontal" && shipX + shipLength <= 10) {
+          for (let i = 0; i < shipLength; i++){
             grid[shipY][shipX + i] = "0";
           }
-        } else if (orientaton === "vertical" && y + shipLength <= 10) {
-          for (let i = 0; i <= length; i++){
+        } else if (orientation === "vertical" && shipY + shipLength <= 10) {
+          for (let i = 0; i <= shipLength; i++){
 
             grid[shipY + i][shipX] = "0";
           }
