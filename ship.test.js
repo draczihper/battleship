@@ -51,7 +51,30 @@ describe("game board factory test", () => {
 
             grid[shipY + i][shipX] = "0";
           }
+        } else {
+          console.log("Ship can't be place at that coordinate without overflowing!")
         }
+
+      for (let y = 0; y < 10; y++){
+        let row = "";
+        for (let x = 0; x < 10; x++){
+          row += grid[y][x] + " ";
+        }
+        console.log(row);
+      }
     }
+    expect(placeship(1, 2, carrier.length, "horizontal")).toEqual(
+. . . . . . . . . . 
+. . . . . . . . . . 
+. 0 0 0 0 0 . . . . 
+. . . . . . . . . . 
+. . . . . . . . . . 
+. . . . . . . . . . 
+. . . . . . . . . . 
+. . . . . . . . . . 
+. . . . . . . . . . 
+. . . . . . . . . . 
+
+    )
   });
 });
