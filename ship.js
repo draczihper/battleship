@@ -32,6 +32,20 @@ function Gameboard() {
 
 
   // Random coordinates in a ten by ten grid
+  const randomNum = () => {
+    const num = Math.floor(Math.random() * 10);
+    return num;
+  }
+
+  const shipX = randomNum();
+  const shipY = randomNum();
+
+  
+
+  // Place ships at a specific coordinate 
+  function placeShip(x, y, len, orientation) {
+    
+  }
 }
 
 module.exports = {
