@@ -48,6 +48,29 @@ function Gameboard() {
   const orientation = randomOrientation();
   
 
+  // Place ships at a specific coordinate 
+  function placeShip(x, y, len, orientation) {
+    const grid = Array(10).fill(0).map(() => Array(10).fill("."));
+
+  if (orientation === "horizontal" && shipX + shipLength <= 10) {
+    for (let i = 0; i < shipLength; i++){
+      grid[shipY][shipX + i] = "0";
+    }
+  } else if(orientation === "vertical" && shipX + shipLength <= 10) {
+    for (let i = 0; i < shipLength; i++){
+      grid[shipX + i][shipY] = "0";
+    }
+  } else {
+    console.log("This ship cannot be placed here without overflowing!")
+    return;
+  }
+
+  const output = grid.map(row => row.join(" ")).join("\n");
+
+  return output;
+}
+
+
 }
 
 module.exports = {
