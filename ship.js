@@ -69,7 +69,9 @@ function Gameboard() {
 
   return output;
 }
-
+shipsArray.forEach(ship => {
+  placeShip(shipX, shipY, ship.length, orientation);
+})
 
 }
 
