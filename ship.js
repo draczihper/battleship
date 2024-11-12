@@ -28,11 +28,6 @@ function isSunk(type) {
 const shipsArray = [carrier, battleship, destroyer, submarine, cruiser];
 
 function Gameboard() {
-  const BOARD_SIZE = 10
-  //Game board (ten by ten grid)
-
-
-
   // Random coordinates in a ten by ten grid
   const randomNum = () => {
     const num = Math.floor(Math.random() * 10);
@@ -69,10 +64,13 @@ function Gameboard() {
 
   return output;
 }
-shipsArray.forEach(ship => {
-  placeShip(shipX, shipY, ship.length, orientation);
-})
-
+  shipsArray.forEach(ship => {
+    placeShip(shipX, shipY, ship.length, orientation);
+  });
+  
+  return {
+    placeShip,
+  }
 }
 
 module.exports = {
@@ -83,5 +81,5 @@ module.exports = {
   cruiser,
   hit, 
   isSunk,
-  placeShip,
+  Gameboard,
 }
