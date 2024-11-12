@@ -27,43 +27,47 @@ function isSunk(type) {
 
 const shipsArray = [carrier, battleship, destroyer, submarine, cruiser];
 
-function Gameboard() {
-  // Random coordinates in a ten by ten grid
-  const randomNum = () => {
-    const num = Math.floor(Math.random() * 10);
-    return num;
-  }
-  const shipX = randomNum();
-  const shipY = randomNum();
+ // Random coordinates in a ten by ten grid
+ const randomNum = () => {
+  const num = Math.floor(Math.random() * 10);
+  return num;
+}
+const shipX = randomNum();
+const shipY = randomNum();
 
-  const randomOrientation = () => {
-    const num = Math.floor(Math.random() * 2);
-    return num === 0 ? "horizontal" : "vertical"
+const randomOrientation = () => {
+  const num = Math.floor(Math.random() * 2);
+  return num === 0 ? "horizontal" : "vertical"
+}
+const orientation = randomOrientation();
+
+
+// Place ships at a specific coordinate 
+function placeShip(x, y, len, orientation) {
+  const grid = Array(10).fill(0).map(() => Array(10).fill("."));
+
+if (orientation === "horizontal" && shipX + shipLength <= 10) {
+  for (let i = 0; i < shipLength; i++){
+    grid[shipY][shipX + i] = "0";
   }
-  const orientation = randomOrientation();
+} else if(orientation === "vertical" && shipX + shipLength <= 10) {
+  for (let i = 0; i < shipLength; i++){
+    grid[shipX + i][shipY] = "0";
+  }
+} else {
+  console.log("This ship cannot be placed here without overflowing!")
+  return;
+}
+
+const output = grid.map(row => row.join(" ")).join("\n");
+
+return output;
+}
+
+function Gameboard() {
   
 
-  // Place ships at a specific coordinate 
-  function placeShip(x, y, len, orientation) {
-    const grid = Array(10).fill(0).map(() => Array(10).fill("."));
-
-  if (orientation === "horizontal" && shipX + shipLength <= 10) {
-    for (let i = 0; i < shipLength; i++){
-      grid[shipY][shipX + i] = "0";
-    }
-  } else if(orientation === "vertical" && shipX + shipLength <= 10) {
-    for (let i = 0; i < shipLength; i++){
-      grid[shipX + i][shipY] = "0";
-    }
-  } else {
-    console.log("This ship cannot be placed here without overflowing!")
-    return;
-  }
-
-  const output = grid.map(row => row.join(" ")).join("\n");
-
-  return output;
-}
+  
   shipsArray.forEach(ship => {
     placeShip(shipX, shipY, ship.length, orientation);
   });
