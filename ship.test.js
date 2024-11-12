@@ -1,4 +1,4 @@
-const { carrier, battleship, submarine, destroyer, cruiser, hit, isSunk } = require("./ship.js");
+const { carrier, battleship, submarine, destroyer, cruiser, hit, isSunk, Gameboard } = require("./ship.js");
 
 describe("ships factory test", () => {
   test("creates battleship object", () => {
@@ -37,28 +37,7 @@ describe("ships factory test", () => {
 
 describe("game board factory test", () => {
   test("place the ship at a coordinate", () => {
-    function placeShip(shipX, shipY, shipLength, orientation) {
-      const grid = Array.from({ length: 10 }, () => Array(10).fill("."))
-    
-
-      if (orientation === "horizontal" && shipX + shipLength <= 10) {
-        for (let i = 0; i < shipLength; i++) {
-          grid[shipY][shipX + i] = "0";
-        }
-      } else if (orientation === "vertical" && shipY + shipLength <= 10) {
-        for (let i = 0; i <= shipLength; i++) {
-
-          grid[shipY + i][shipX] = "0";
-        }
-      } else {
-        console.log("Ship can't be place at that coordinate without overflowing!");
-      }
-
-      const output = grid.map(row => row.join(" ")).join("\n");
-
-      return output;
-    }
-    expect(placeShip(1, 2, carrier.length, "horizontal")).toEqual(`. . . . . . . . . .
+    expect(Gameboard.placeShip(1, 2, carrier.length, "horizontal")).toEqual(`. . . . . . . . . .
 . . . . . . . . . .
 . 0 0 0 0 0 . . . .
 . . . . . . . . . .
