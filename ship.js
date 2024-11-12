@@ -5,23 +5,14 @@ function Ship(length) {
     hits += 1;
   }
 
-  return {
-    
+  const isSunk = () => {
+    return hits >= length;
   }
-}
 
-
-
-function hit(type) {
-  let totalHits = type.hits++;
-  return totalHits;
-}
-
-function isSunk(type) {
-  if (type.length === type.hits) {
-    return true;
-  } else {
-    return false;
+  return {
+    length,
+    hits, 
+    isSunk
   }
 }
 
@@ -64,13 +55,12 @@ return output;
 
 
 function Gameboard() {
-const carrier = Ship(5, 0, false);
-const battleship = Ship(4, 0, false);
-const submarine = Ship(3, 0, false);
-const destroyer = Ship(3, 0, false);
-const cruiser = Ship(2, 0, false);
+  const grid = Array(10).fill(0).map(() => Array(10).fill('.'));
+  const missedAttacks = [];
+  const ships = [];
 
-const shipsArray = [carrier, battleship, destroyer, submarine, cruiser];
+
+
  
   return {
     shipsArray.forEach(ship => {
