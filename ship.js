@@ -52,6 +52,25 @@ function Gameboard() {
     }
   }
 
+  const receiveAttack = (x, y) => {
+    const cellContent = grid[y][x];
+
+    if (cellContent === null) {
+      missedAttacks.push([x, y])
+      return "Miss";
+    } else if (cellContent === "Sunk") {
+      return "Already sunk";
+    } else {
+      cellContent.hit();
+      if (cellContent.isSunk()) {
+        grid[y][x] = "Sunk";
+        return "Hit and Sunk";
+      } else {
+        return "Hit";
+      }
+    }
+  }
+
   
 }
 
