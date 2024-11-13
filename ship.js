@@ -71,6 +71,10 @@ function Gameboard() {
     }
   }
 
+  const allShipSunk = () => {
+    return grid.every(row => row.every(cell => cell === null || cell === "Sunk"))
+  }
+
   
 }
 
