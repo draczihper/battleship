@@ -75,7 +75,14 @@ function Gameboard() {
     return grid.every(row => row.every(cell => cell === null || cell === "Sunk"))
   }
 
-  
+  placeShipsRandomly();
+  return {
+    placeShip,
+    receiveAttack,
+    allShipsSunk,
+    missedAttacks,
+    ships,
+  }
 }
 
 module.exports = {
