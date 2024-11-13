@@ -21,6 +21,21 @@ function Gameboard() {
   const missedAttacks = [];
   const ships = [];
 
+  const placeShip = (x, y, ship, orientation) => {
+    if (orientation === "horizontal" && x + ship.length <= 10) {
+      for (let i = 0; i < ship.length; i++) {
+        grid[y][x + i] = ship;
+      }
+    } else if (orientation === "vertical" && y + ship.length <= 10) {
+      for (let i = 0; i < ship.length; i++) {
+        grid[y + i][x] = ship;
+      }
+    } else {
+      throw new Error("Ship cannot be placed without overflowing!");
+    }
+    ships.push(ship);
+  };
+
   
 }
 
