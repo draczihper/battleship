@@ -71,7 +71,7 @@ function Gameboard() {
     }
   }
 
-  const allShipSunk = () => {
+  const allShipsSunk = () => {
     return grid.every(row => row.every(cell => cell === null || cell === "Sunk"))
   }
 
