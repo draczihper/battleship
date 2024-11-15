@@ -86,5 +86,6 @@ function Gameboard() {
 }
 
 module.exports = {
- 
+ Ship,
+ Gameboard
 }
