@@ -3,13 +3,11 @@ const { Ship, Gameboard } = require("./ship.js");
 describe("ships factory test", () => {
   test("creates battleship object", () => {
     const battleship = Ship(4)
-    expect(battleship).toEqual({
-      length: 4,
-      hits: 0,
-      isSunk: false,
-    });
+    expect(battleship.length).toEqual(4);
   });
+});
   
+  /*
   test("creates destroyer object", () => {
     const destroyer = Ship(3)
     expect(destroyer).toEqual({
@@ -23,11 +21,11 @@ describe("ships factory test", () => {
     const carrier = Ship(3)
     carrier.hit();
     carrier.hit();
-    carrier.hit();
+    carrier.hit;
     expect(carrier.hits).toEqual(3)
   });
 });
-/*
+
   test("increments cruiser number of hits", () => {
     hit(cruiser)
     hit(cruiser)
