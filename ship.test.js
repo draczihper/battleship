@@ -5,18 +5,21 @@ describe("ships factory test", () => {
     const battleship = Ship(4)
     expect(battleship.length).toEqual(4);
   });
-});
-  
-  /*
   test("creates destroyer object", () => {
     const destroyer = Ship(3)
-    expect(destroyer).toEqual({
-      length: 3,
-      hits: 0,
-      isSunk: false,
-    });
+    destroyer.hit()
+    destroyer.hit()
+    expect(destroyer.hits).toEqual(2);
   });
-  
+
+  test("creates destroyer object", () => {
+    const cruiser = Ship(2)
+    cruiser.hit()
+    cruiser.hit()
+    expect(cruiser.isSunk).toEqual(true);
+  });
+});
+/*
   test("increments carrier number of hits", () => {
     const carrier = Ship(3)
     carrier.hit();
@@ -24,7 +27,6 @@ describe("ships factory test", () => {
     carrier.hit;
     expect(carrier.hits).toEqual(3)
   });
-});
 
   test("increments cruiser number of hits", () => {
     hit(cruiser)
