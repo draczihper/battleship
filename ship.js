@@ -1,5 +1,5 @@
-function Ship(length) {
-  let hits = 0
+function Ship(length){ 
+  let hits = 0;
 
   const hit = () => {
     hits += 1;
@@ -8,13 +8,17 @@ function Ship(length) {
   const isSunk = () => {
     return hits >= length;
   }
+  
 
   return {
     length,
-    hits, 
+    get hits() {
+      return hits;
+    },
     get isSunk(){
       return isSunk();
-    }
+    },
+    hit,
   }
 }
 
