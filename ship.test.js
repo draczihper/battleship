@@ -53,4 +53,23 @@ describe("gameboard factory", () => {
     [".", ".", ".", ".", ".", ".", ".", ".", ".", "."],
     [".", ".", ".", ".", ".", ".", ".", ".", ".", "."]])
   });
-});
+
+  test("check for valid placement of ships in the board", () => {
+    const grid = Array(10).fill(0).map(() => Array(10).fill(null));
+    const isValidPlacement = (x, y, length, orientation) => {
+      if(orientation == "vertical" && y + length > 10)return false;
+      if(orientation == "horizontal" && x + length > 10)return false;
+
+      for (let i = 0; i < length; i++){
+        if (orientation == "vertical") {
+          if (grid[y + i][x] !== null) return false;
+        } else {
+          if (grid[y][x + i] !== null) return false;
+        }
+
+        return true;
+      }
+    }
+    expect(isValidPlacement(3, 7, 5, "vertical")).toEqual(false)
+  })
+  });
