@@ -27,6 +27,12 @@ function Gameboard() {
   const missedAttacks = [];
   const ships = [];
 
+  const isValidPlacement = (x, y, length, isVertical) => {
+    if (isVertical && y + length > 10) return false;
+    if (!isVertical && x + length > 10) return false;
+    
+  }
+
   const placeShip = (x, y, ship, orientation) => {
     if (orientation === "horizontal" && x + ship.length <= 10) {
       for (let i = 0; i < ship.length; i++) {
