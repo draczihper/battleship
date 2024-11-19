@@ -56,20 +56,58 @@ describe("gameboard factory test", () => {
 
   test("check for valid placement of ships in the board", () => {
     const grid = Array(10).fill(0).map(() => Array(10).fill(null));
-    const isValidPlacement = (x, y, length, orientation) => {
-      if(orientation == "vertical" && y + length > 10)return false;
-      if(orientation == "horizontal" && x + length > 10)return false;
 
-      for (let i = 0; i < length; i++){
+    const isValidPlacement = (x, y, length, orientation) => {
+      if (orientation == "vertical" && y + length > 10) return false;
+      if (orientation == "horizontal" && x + length > 10) return false;
+
+      for (let i = 0; i < length; i++) {
         if (orientation == "vertical") {
           if (grid[y + i][x] !== null) return false;
         } else {
           if (grid[y][x + i] !== null) return false;
         }
-
         return true;
       }
-    }
+    };
     expect(isValidPlacement(3, 7, 5, "vertical")).toEqual(false)
+  });
+  test("test ship placement", () => {
+    const grid = Array(10).fill(0).map(() => Array(10).fill(null));
+    const ships = [];
+
+    const isValidPlacement = (x, y, length, orientation) => {
+      if (orientation == "vertical" && y + length > 10) return false;
+      if (orientation == "horizontal" && x + length > 10) return false;
+
+      for (let i = 0; i < length; i++) {
+        if (orientation == "vertical") {
+          if (grid[y + i][x] !== null) return false;
+        } else {
+          if (grid[y][x + i] !== null) return false;
+        }
+        return true;
+      }
+    };
+
+    const placeship = (x, y, ship, orientation,) => {
+      if (!isValidPlacement(x, y, ship.length, orientation)) {
+        return false;
+      }
+
+      ships.push(ship);
+      for (let i = 0; i < ship.length; i++) {
+        if (orientation === "vertical") {
+          grid[y + i][x] = ship
+        } else {
+          grid[y][x + i] = ship;
+        }
+      }
+
+      return true;
+    };
+    const carrier = Ship(5);
+    expect(placeship(3, 7, carrier, "vertical")).toEqual(false);
+    expect(placeship(4, 1, carrier, "horizontal")).toEqual(true)
   })
   });
