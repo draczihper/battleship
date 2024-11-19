@@ -39,7 +39,7 @@ describe("ships factory test", () => {
   });
 });
 
-describe("gameboard factory", () => {
+describe("gameboard factory test", () => {
   test("log the game board in the console", () => {
     const grid = Array(10).fill(0).map(() => Array(10).fill("."))
     expect(grid).toEqual([[".", ".", ".", ".", ".", ".", ".", ".", ".", "."],
