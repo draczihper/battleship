@@ -28,8 +28,8 @@ function Gameboard() {
   const ships = [];
 
   const isValidPlacement = (x, y, length, orientation) => {
-    if(orientation == "vertical" && y + length > 10)return false;
-      if(orientation == "horizontal" && x + length > 10)return false;
+    if (orientation == "vertical" && y + length > 10) return false;
+    if (orientation == "horizontal" && x + length > 10) return false;
     
     for (let i = 0; i < length; i++) {
       if (orientation == "vertical") {
@@ -40,7 +40,7 @@ function Gameboard() {
 
       return true;
     }
-  }
+  };
 
   const placeShip = (x, y, ship, orientation) => {
     if (!isValidPlacement(x, y, ship.length, orientation)) {
@@ -48,7 +48,14 @@ function Gameboard() {
     }
 
     ships.push(ship);
-
+    for (let i = 0; i < ship.length; i++){
+      if(orientation === "vertical"){
+        grid[y + i][x] = ship;
+      } else {
+        grid[y][x + i] = ship;
+      }
+    }
+    return true;
   };
 
   const placeShipsRandomly = () => {
