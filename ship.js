@@ -83,18 +83,21 @@ function Gameboard() {
     if (cellContent === null) {
       missedAttacks.push([x, y])
       return "Miss";
-    } else if (cellContent === "Sunk") {
-      return "Already sunk";
     } else {
       cellContent.hit();
       if (cellContent.isSunk()) {
-        grid[y][x] = "Sunk";
+        for (let i = 0; i < 10; i++) {
+          for (let i = 0; j < 10; j++) {
+            if (grid[j][i] === cellContent) {
+              grid[i][j] = "Sunk";
+            }
+          }
+        }
         return "Hit and Sunk";
-      } else {
-        return "Hit";
       }
+      return "Hit"
     }
-  }
+  };
 
   const allShipsSunk = () => {
     return grid.every(row => row.every(cell => cell === null || cell === "Sunk"))
