@@ -60,14 +60,21 @@ function Gameboard() {
 
   const placeShipsRandomly = (ship) => {
     let placed = false;
-      while (!placed) {
-        const x = Math.floor(Math.random() * 10);
-        const y = Math.floor(Math.random() * 10);
-        const orientation = Math.random < 0.5 ? "Horizontal" : "Vertical"; 
+    while (!placed) {
+      const x = Math.floor(Math.random() * 10);
+      const y = Math.floor(Math.random() * 10);
+      const orientation = Math.random < 0.5 ? "Horizontal" : "Vertical";
 
-        placed = placeShip(x, y, ship, orientation);
-      }
+      placed = placeShip(x, y, ship, orientation);
     }
+  };
+  
+  const initializeBoard = () => {
+    const shipLengths = [5, 4, 3, 3, 2];
+    shipLengths.forEach(length => {
+      const ship = Ship(length);
+      placeShipsRandomly(ship)
+    })
   }
 
   const receiveAttack = (x, y) => {
