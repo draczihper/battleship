@@ -23,7 +23,7 @@ function Ship(length){
 }
 
 function Gameboard() {
-  const grid = Array(10).fill(0).map(() => Array(10).fill('.'));
+  const grid = Array(10).fill(0).map(() => Array(10).fill(null));
   const missedAttacks = [];
   const ships = [];
 
@@ -58,18 +58,14 @@ function Gameboard() {
     return true;
   };
 
-  const placeShipsRandomly = () => {
-    const shipsLengths = [5, 4, 3, 3, 2];
-    for (const length of shipsLengths) {
-      let placed = false;
+  const placeShipsRandomly = (ship) => {
+    let placed = false;
       while (!placed) {
         const x = Math.floor(Math.random() * 10);
         const y = Math.floor(Math.random() * 10);
         const orientation = Math.random < 0.5 ? "Horizontal" : "Vertical"; 
 
-        // Wrap in try-catch block
-        placeShip(x, y, Ship(length), orientation);
-        placed = true;
+        placed = placeShip(x, y, ship, orientation);
       }
     }
   }
