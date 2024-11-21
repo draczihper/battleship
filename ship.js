@@ -100,18 +100,51 @@ function Gameboard() {
   };
 
   const allShipsSunk = () => {
-    return grid.every(row => row.every(cell => cell === null || cell === "Sunk"))
+    return ships.forEach(ship => ship.isSunk());
+  }
+
+  const getGrid = () => {
+    return grid.map(row => row.map(cell => {
+      if (cell === null) return ".";
+      if (cell === "Sunk") return "X";
+      return "O"
+    }));
   }
 
   placeShipsRandomly();
   return {
     placeShip,
+    placeShipsRandomly,
     receiveAttack,
+    initializeBoard,
     allShipsSunk,
     missedAttacks,
-    ships,
+    getGrid
   }
 }
+
+const board = Gameboard();
+gameboard.initializeBoard();
+
+console.log('Initial board setup:');
+const displayBoard = board.getGrid()
+  .map(row => row.join(' '))
+  .join('\n');
+console.log(displayBoard);
+
+// Test some attacks
+console.log('\nTesting some attacks:');
+for (let i = 0; i < 5; i++) {
+  const x = Math.floor(Math.random() * 10);
+  const y = Math.floor(Math.random() * 10);
+  console.log(`Attacking (${x}, ${y}):`, board.receiveAttack(x, y));
+}
+
+console.log('\nUpdated board:');
+const updatedBoard = board.getGrid()
+  .map(row => row.join(' '))
+  .join('\n');
+console.log(updatedBoard);
 
 module.exports = {
  Ship,
