@@ -124,7 +124,7 @@ function Gameboard() {
 }
 
 const board = Gameboard();
-gameboard.initializeBoard();
+board.initializeBoard();
 
 console.log('Initial board setup:');
 const displayBoard = board.getGrid()
