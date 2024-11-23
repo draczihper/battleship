@@ -12,13 +12,9 @@ function Ship(length){
 
   return {
     length,
-    get hits() {
-      return hits;
-    },
-    get isSunk(){
-      return isSunk();
-    },
     hit,
+    isSunk,
+    getHits: () => hits
   }
 }
 
@@ -27,8 +23,10 @@ function Gameboard() {
   const missedAttacks = [];
   const ships = [];
 
-  const isValidPlacement = (x, y, length, orientation) => {
-    if (orientation == "vertical" && y + length > 10) return false;
+  const isValidPlacement = (x, y, length, isVertical) => {
+    if (x < 0 || x > 9 || y < 0 || y > 9) return false;
+
+    if (isVertical && y + length > 10) return false;
     if (orientation == "horizontal" && x + length > 10) return false;
     
     for (let i = 0; i < length; i++) {
@@ -85,7 +83,7 @@ function Gameboard() {
       return "Miss";
     } else {
       cellContent.hit();
-      if (cellContent.isSunk()) {
+      if (cellContent.isSunk) {
         for (let i = 0; i < 10; i++) {
           for (let i = 0; j < 10; j++) {
             if (grid[j][i] === cellContent) {
@@ -111,7 +109,6 @@ function Gameboard() {
     }));
   }
 
-  placeShipsRandomly();
   return {
     placeShip,
     placeShipsRandomly,
