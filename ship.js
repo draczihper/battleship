@@ -27,27 +27,29 @@ function Gameboard() {
     if (x < 0 || x > 9 || y < 0 || y > 9) return false;
 
     if (isVertical && y + length > 10) return false;
-    if (orientation == "horizontal" && x + length > 10) return false;
-    
-    for (let i = 0; i < length; i++) {
-      if (orientation == "vertical") {
-        if (grid[y + i][x] !== null) return false;
-      } else {
-        if (grid[y][x + i] !== null) return false;
-      }
+    if (!isVertical && x + length > 10) return false;
 
-      return true;
+    for (let i = -1; i <= length; i++){
+      for (let j = -1; i <= 1; j++){
+        let checkX = isVertical ? x + j : x + i;
+        let checkY = isVertical ? y + i : y + j;
+
+        if (checkX < 0 || checkX > 9 || checkY < 0 || checkY > 9) continue;
+
+        if (grid[checkX][checkY] !== null) return false;
+      }
     }
+    return true;
   };
 
-  const placeShip = (x, y, ship, orientation) => {
-    if (!isValidPlacement(x, y, ship.length, orientation)) {
+  const placeShip = (x, y, ship, isVertical) => {
+    if (!isValidPlacement(x, y, ship.length, isVertical)) {
       return false;
     }
 
     ships.push(ship);
     for (let i = 0; i < ship.length; i++){
-      if(orientation === "vertical"){
+      if(isVertical){
         grid[y + i][x] = ship;
       } else {
         grid[y][x + i] = ship;
