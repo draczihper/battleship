@@ -59,14 +59,24 @@ function Gameboard() {
   };
 
   const placeShipsRandomly = (ship) => {
-    let placed = false;
-    while (!placed) {
-      const x = Math.floor(Math.random() * 10);
-      const y = Math.floor(Math.random() * 10);
-      const orientation = Math.random < 0.5 ? "Horizontal" : "Vertical";
+    let attempts = 0;
+    let maxAttempts = 100;
+    
+    while (attempts < maxAttempts) {
+      const BOARD_SIZE = 10;
+      const isVertical = Math.random() < 0.5;
+      const maxX = isVertical ? BOARD_SIZE - 1 : BOARD_SIZE - ship.length;
+      const maxY = isVertical ? BOARD_SIZE - ship.length : BOARD_SIZE - 1;
 
-      placed = placeShip(x, y, ship, orientation);
+      const x = Math.floor(Math.random() * (maxX + 1));
+      const y = Math.floor(Math.random() * (maxY + 1));
+      
+      if (placeship(x, y, ship, isVertical)){
+        return true;
+      }
+      attempts++;
     }
+    return false
   };
   
   const initializeBoard = () => {
