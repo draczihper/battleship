@@ -81,10 +81,17 @@ function Gameboard() {
   
   const initializeBoard = () => {
     const shipLengths = [5, 4, 3, 3, 2];
-    shipLengths.forEach(length => {
-      const ship = Ship(length);
-      placeShipsRandomly(ship)
-    })
+    let allShipsPlaced = true;
+
+    for (let i = 0; i < 10; i++){
+      for (let j = 0; j < 10; j++){
+        grid[i][j] = null;
+      }
+    }
+
+    for (const length of shipLengths) {
+      
+    }
   }
 
   const receiveAttack = (x, y) => {
