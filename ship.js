@@ -24,20 +24,13 @@ function Gameboard() {
   const ships = [];
 
   const isValidPlacement = (x, y, length, isVertical) => {
-    if (x < 0 || x > 9 || y < 0 || y > 9) return false;
-
     if (isVertical && y + length > 10) return false;
     if (!isVertical && x + length > 10) return false;
 
-    for (let i = -1; i <= length; i++){
-      for (let j = -1; i <= 1; j++){
-        let checkX = isVertical ? x + j : x + i;
-        let checkY = isVertical ? y + i : y + j;
-
-        if (checkX < 0 || checkX > 9 || checkY < 0 || checkY > 9) continue;
-
-        if (grid[checkX][checkY] !== null) return false;
-      }
+    for (let i = 0; i < length; i++) {
+      const checkX = isVertical ? x : x + i;
+      const checkY = isVertical ? y + i : y;
+      if (grid[checkY][checkX] !== null) return false;
     }
     return true;
   };
@@ -59,29 +52,23 @@ function Gameboard() {
   };
 
   const placeShipsRandomly = (ship) => {
-    let attempts = 0;
-    let maxAttempts = 100;
-    
-    while (attempts < maxAttempts) {
+
       const BOARD_SIZE = 10;
+    while (true) {
       const isVertical = Math.random() < 0.5;
       const maxX = isVertical ? BOARD_SIZE - 1 : BOARD_SIZE - ship.length;
       const maxY = isVertical ? BOARD_SIZE - ship.length : BOARD_SIZE - 1;
 
       const x = Math.floor(Math.random() * (maxX + 1));
       const y = Math.floor(Math.random() * (maxY + 1));
-      
-      if (placeship(x, y, ship, isVertical)){
+      if (placeShip(x, y, ship, isVertical)){
         return true;
       }
-      attempts++;
     }
-    return false
   };
   
   const initializeBoard = () => {
     const shipLengths = [5, 4, 3, 3, 2];
-    let allShipsPlaced = true;
 
     for (let i = 0; i < 10; i++){
       for (let j = 0; j < 10; j++){
@@ -93,13 +80,8 @@ function Gameboard() {
     for (const length of shipLengths) {
       const ship = Ship(length)
       if(!placeShipsRandomly(ship)){
-        allShipsPlaced = false;
-        break;
+        return false;
       }
-    }
-
-    if (!allShipsPlaced) {
-      return initializeBoard();
     }
     return true;
   }
@@ -122,7 +104,7 @@ function Gameboard() {
       if (cellContent.isSunk()) {
         for (let i = 0; i < 10; i++) {
           for (let i = 0; j < 10; j++) {
-            if (grid[i][j] === "Hit" && cellContent === ships.find(ship => ship.isSunk() && ship.length === cellContent.length && ship.getHits() === cellContent.getHits())) {
+            if (grid[i][j] === "Hit" && grid[i][j] === cellContent) {
               grid[i][j] = "Sunk";
             }
           }
@@ -144,6 +126,10 @@ function Gameboard() {
       if (cell === "Sunk") return "X";
       return "O"
     }));
+  }
+
+  while (!initializeBoard()) {
+    // Keep trying until successful
   }
 
   return {
