@@ -88,24 +88,41 @@ function Gameboard() {
         grid[i][j] = null;
       }
     }
+    ships.length = 0;
 
     for (const length of shipLengths) {
-      
+      const ship = Ship(length)
+      if(!placeShipsRandomly(ship)){
+        allShipsPlaced = false;
+        break;
+      }
     }
+
+    if (!allShipsPlaced) {
+      return initializeBoard();
+    }
+    return true;
   }
 
   const receiveAttack = (x, y) => {
+    if (x < 0 || x > 9 || y < 0 || y > 9) {
+      return "Invalid coordinates"
+    }
     const cellContent = grid[y][x];
 
     if (cellContent === null) {
       missedAttacks.push([x, y])
       return "Miss";
+    } else if (cellContent === "Hit" || cellContent === "Sunk") { 
+      return "Already attacked this position";
     } else {
       cellContent.hit();
-      if (cellContent.isSunk) {
+      grid[y][x] = "Hit";
+
+      if (cellContent.isSunk()) {
         for (let i = 0; i < 10; i++) {
           for (let i = 0; j < 10; j++) {
-            if (grid[j][i] === cellContent) {
+            if (grid[i][j] === "Hit" && cellContent === ships.find(ship => ship.isSunk() && ship.length === cellContent.length && ship.getHits() === cellContent.getHits())) {
               grid[i][j] = "Sunk";
             }
           }
@@ -117,12 +134,13 @@ function Gameboard() {
   };
 
   const allShipsSunk = () => {
-    return ships.forEach(ship => ship.isSunk());
+    return ships.every(ship => ship.isSunk());
   }
 
   const getGrid = () => {
     return grid.map(row => row.map(cell => {
       if (cell === null) return ".";
+      if(cell === "Hit") return "H"
       if (cell === "Sunk") return "X";
       return "O"
     }));
