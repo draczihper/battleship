@@ -103,7 +103,7 @@ function Gameboard() {
 
       if (cellContent.isSunk()) {
         for (let i = 0; i < 10; i++) {
-          for (let i = 0; j < 10; j++) {
+          for (let j = 0; j < 10; j++) {
             if (grid[i][j] === "Hit" && grid[i][j] === cellContent) {
               grid[i][j] = "Sunk";
             }
@@ -122,8 +122,8 @@ function Gameboard() {
   const getGrid = () => {
     return grid.map(row => row.map(cell => {
       if (cell === null) return ".";
-      if(cell === "Hit") return "H"
-      if (cell === "Sunk") return "X";
+      if(cell === "Hit") return "X"
+      if (cell === "Sunk") return "#";
       return "O"
     }));
   }
