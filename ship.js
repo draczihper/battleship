@@ -53,7 +53,7 @@ function Gameboard() {
 
   const placeShipsRandomly = (ship) => {
 
-      const BOARD_SIZE = 10;
+    const BOARD_SIZE = 10;
     while (true) {
       const isVertical = Math.random() < 0.5;
       const maxX = isVertical ? BOARD_SIZE - 1 : BOARD_SIZE - ship.length;
