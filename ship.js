@@ -143,6 +143,10 @@ function Gameboard() {
   }
 }
 
+function Player(type = "human") {
+  const gameboard = Gameboard();
+}
+
 const board = Gameboard();
 board.initializeBoard();
 
