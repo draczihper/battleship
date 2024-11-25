@@ -9,20 +9,20 @@ describe("ships factory test", () => {
     const destroyer = Ship(3)
     destroyer.hit()
     destroyer.hit()
-    expect(destroyer.hits).toEqual(2);
+    expect(destroyer.getHits()).toEqual(2);
   });
   test("creates cruiser object and access its isSunk property", () => {
     const cruiser = Ship(2)
     cruiser.hit()
     cruiser.hit()
-    expect(cruiser.isSunk).toEqual(true);
+    expect(cruiser.isSunk()).toEqual(true);
   });
   test("increments carrier number of hits", () => {
     const carrier = Ship(3)
     carrier.hit();
     carrier.hit();
     carrier.hit();
-    expect(carrier.hits).toEqual(3)
+    expect(carrier.getHits()).toEqual(3)
   });
   test("increments submarine number of hits", () => {
     const submarine = Ship(3);
