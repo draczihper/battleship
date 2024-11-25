@@ -110,4 +110,9 @@ describe("gameboard factory test", () => {
     expect(placeship(3, 7, carrier, "vertical")).toEqual(false);
     expect(placeship(4, 1, carrier, "horizontal")).toEqual(true)
   })
+  test("test placing ships randomly", () => {
+    const cruiser = Ship(2);
+    const placeCruiser = Gameboard().placeShipsRandomly(cruiser)
+    expect(placeCruiser).toEqual(true)
+  })
   });
