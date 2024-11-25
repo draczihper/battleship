@@ -29,13 +29,13 @@ describe("ships factory test", () => {
     submarine.hit()
     submarine.hit()
     submarine.hit(3)
-    expect(submarine.hits).toEqual(3)
+    expect(submarine.getHits()).toEqual(3)
   });
   test("check if submarine is sunk", () => {
     const submarine = Ship(3);
     submarine.hit()
     submarine.hit()
-    expect(submarine.isSunk).toEqual(false)
+    expect(submarine.isSunk()).toEqual(false)
   });
 });
 
