@@ -145,6 +145,18 @@ function Gameboard() {
 
 function Player(type = "human") {
   const gameboard = Gameboard();
+
+  const makeRandomMove = () => {
+    let x, y;
+    do {
+      x = Math.floor(Math.random() * 10);
+      y = Math.floor(Math.random() * 10);
+    } while (
+      gameboard.getGrid()[y][x] === "H" ||
+      gameboard.getGrid()[y][x] === "X"
+
+    )
+  }
 }
 
 const board = Gameboard();
