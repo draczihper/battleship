@@ -154,8 +154,15 @@ function Player(type = "human") {
     } while (
       gameboard.getGrid()[y][x] === "H" ||
       gameboard.getGrid()[y][x] === "X"
+    );
+    return { x, y };
+  };
 
-    )
+  const attack = (enemyBoard, x, y){
+    if (type === "computer") {
+      const move = makeRandomMove();
+      return enemyBoard.receiveAttack(move.x, move.y)
+    }
   }
 }
 
