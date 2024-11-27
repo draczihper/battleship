@@ -116,3 +116,12 @@ describe("gameboard factory test", () => {
     expect(placeCruiser).toEqual(true)
   })
   });
+
+
+describe("player factory test", () => {
+  test("computer's turn", () => {
+      
+
+    expect().toEqual();
+    })
+  })
