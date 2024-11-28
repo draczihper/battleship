@@ -162,8 +162,8 @@ function Player(type = "human") {
     if (type === "computer") {
       const move = makeRandomMove();
       return enemyBoard.receiveAttack(move.x, move.y)
-      return enemyBoard.attack(x, y);
     }
+    return enemyBoard.attack(x, y);
   }
 
   return {
