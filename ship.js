@@ -179,14 +179,16 @@ const computer = Player("computer")
 human.gameboard.initializeBoard();
 computer.gameboard.initializeBoard();
 
-const board = Gameboard();
-board.initializeBoard();
 
-console.log('Initial board setup:');
-const displayBoard = board.getGrid()
+console.log("Human's board:");
+console.log(human.gameboard.getGrid()
   .map(row => row.join(' '))
-  .join('\n');
-console.log(displayBoard);
+  .join('\n'));
+
+  console.log("\nComputer's board:");
+console.log(computer.gameboard.getGrid()
+  .map(row => row.join(' '))
+  .join('\n'));
 
 // Test some attacks
 console.log('\nTesting some attacks:');
