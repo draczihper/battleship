@@ -173,6 +173,12 @@ function Player(type = "human") {
   }
 }
 
+const human = Player("human")
+const computer = Player("computer")
+
+human.gameboard.initializeBoard();
+computer.gameboard.initializeBoard();
+
 const board = Gameboard();
 board.initializeBoard();
 
