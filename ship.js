@@ -190,7 +190,22 @@ console.log(computer.gameboard.getGrid()
   .map(row => row.join(' '))
   .join('\n'));
 
-  
+  console.log('\nHuman attacks computer at (5,5):');
+console.log(human.attack(computer.gameboard, 0, 0));
+
+console.log('\nComputer makes random attack:');
+console.log(computer.attack(human.gameboard));
+
+console.log("\nUpdated Human's board:");
+console.log(human.gameboard.getGrid()
+  .map(row => row.join(' '))
+  .join('\n'));
+
+console.log("\nUpdated Computer's board:");
+console.log(computer.gameboard.getGrid()
+  .map(row => row.join(' '))
+  .join('\n'));
+
 module.exports = {
  Ship,
  Gameboard
