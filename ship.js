@@ -158,12 +158,12 @@ function Player(type = "human") {
     return { x, y };
   };
 
-  const attack = (enemyBoard, x, y){
+  const attack = (enemyBoard, x, y) => {
     if (type === "computer") {
       const move = makeRandomMove();
       return enemyBoard.receiveAttack(move.x, move.y)
     }
-    return enemyBoard.attack(x, y);
+    return enemyBoard.receiveAttack(x, y);
   }
 
   return {
@@ -190,20 +190,7 @@ console.log(computer.gameboard.getGrid()
   .map(row => row.join(' '))
   .join('\n'));
 
-// Test some attacks
-console.log('\nTesting some attacks:');
-for (let i = 0; i < 5; i++) {
-  const x = Math.floor(Math.random() * 10);
-  const y = Math.floor(Math.random() * 10);
-  console.log(`Attacking (${x}, ${y}):`, board.receiveAttack(x, y));
-}
-
-console.log('\nUpdated board:');
-const updatedBoard = board.getGrid()
-  .map(row => row.join(' '))
-  .join('\n');
-console.log(updatedBoard);
-
+  
 module.exports = {
  Ship,
  Gameboard
