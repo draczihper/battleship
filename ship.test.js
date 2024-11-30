@@ -1,4 +1,4 @@
-const { Ship, Gameboard } = require("./ship.js");
+const { Ship, Gameboard, Player } = require("./ship.js");
 
 describe("ships factory test", () => {
   test("creates battleship object and access its length", () => {
@@ -119,9 +119,11 @@ describe("gameboard factory test", () => {
 
 
 describe("player factory test", () => {
-  test("computer's turn", () => {
-      
+  test("player type", () => {
+    const human = Player("human");
+    const computer = Player("computer")
 
-    expect().toEqual();
-    })
-  })
+    expect(human.type).toEqual("human");
+    expect(computer.type).toEqual("computer");
+  });
+});
