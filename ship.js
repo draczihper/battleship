@@ -208,5 +208,7 @@ console.log(computer.gameboard.getGrid()
 
 module.exports = {
  Ship,
- Gameboard
+  Gameboard, 
+  Player
+ 
 }
