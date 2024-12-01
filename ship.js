@@ -1,3 +1,5 @@
+const Player = require("./player.js")
+
 function Ship(length) {
   let hits = 0;
 
@@ -47,40 +49,6 @@ function Gameboard() {
         grid[y + i][x] = ship;
       } else {
         grid[y][x + i] = ship;
-      }
-    }
-    return true;
-  };
-
-  const placeShipsRandomly = (ship) => {
-    const BOARD_SIZE = 10;
-    while (true) {
-      const isVertical = Math.random() < 0.5;
-      const maxX = isVertical ? BOARD_SIZE - 1 : BOARD_SIZE - ship.length;
-      const maxY = isVertical ? BOARD_SIZE - ship.length : BOARD_SIZE - 1;
-
-      const x = Math.floor(Math.random() * (maxX + 1));
-      const y = Math.floor(Math.random() * (maxY + 1));
-      if (placeShip(x, y, ship, isVertical)) {
-        return true;
-      }
-    }
-  };
-
-  const initializeBoard = () => {
-    const shipLengths = [5, 4, 3, 3, 2];
-
-    for (let i = 0; i < 10; i++) {
-      for (let j = 0; j < 10; j++) {
-        grid[i][j] = null;
-      }
-    }
-    ships.length = 0;
-
-    for (const length of shipLengths) {
-      const ship = Ship(length);
-      if (!placeShipsRandomly(ship)) {
-        return false;
       }
     }
     return true;
@@ -142,39 +110,11 @@ function Gameboard() {
     allShipsSunk,
     missedAttacks,
     getGrid,
+    ships
   };
 }
 
-function Player(type = "human") {
-  const gameboard = Gameboard();
-
-  const makeRandomMove = () => {
-    let x, y;
-    do {
-      x = Math.floor(Math.random() * 10);
-      y = Math.floor(Math.random() * 10);
-    } while (
-      gameboard.getGrid()[y][x] === "H" ||
-      gameboard.getGrid()[y][x] === "X"
-    );
-    return { x, y };
-  };
-
-  const attack = (enemyBoard, x, y) => {
-    if (type === "computer") {
-      const move = makeRandomMove();
-      return enemyBoard.receiveAttack(move.x, move.y);
-    }
-    return enemyBoard.receiveAttack(x, y);
-  };
-
-  return {
-    type,
-    gameboard,
-    attack,
-  };
-}
-
+/*
 const human = Player("human");
 const computer = Player("computer");
 
@@ -218,9 +158,10 @@ console.log(
     .map((row) => row.join(" "))
     .join("\n")
 );
+*/
+
 
 module.exports = {
   Ship,
   Gameboard,
-  Player,
 };
