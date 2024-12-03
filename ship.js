@@ -1,4 +1,4 @@
-const Player = require("./player.js")
+import Player from "./player.js"
 
 function Ship(length) {
   let hits = 0;
@@ -98,15 +98,9 @@ function Gameboard() {
     );
   };
 
-  while (!initializeBoard()) {
-    // Keep trying until successful
-  }
-
   return {
     placeShip,
-    placeShipsRandomly,
     receiveAttack,
-    initializeBoard,
     allShipsSunk,
     missedAttacks,
     getGrid,
@@ -161,7 +155,4 @@ console.log(
 */
 
 
-module.exports = {
-  Ship,
-  Gameboard,
-};
+export { Ship, Gameboard };
