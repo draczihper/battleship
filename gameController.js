@@ -22,7 +22,7 @@ function GameController() {
     }
 
     function handleComputerTurn() {
-        const attackResult = computer.attack(playerOne.gameboard)
+        const attackResult = computer.makeRandomAttack(playerOne.gameboard)
         uiController.updatePlayerBoard();
 
         checkGameStatus(playerOne);
