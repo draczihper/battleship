@@ -43,13 +43,14 @@ function Gameboard() {
       return false;
     }
 
-    ships.push(ship);
-    for (let i = 0; i < ship.length; i++) {
-      if (isVertical) {
-        grid[y + i][x] = ship;
-      } else {
-        grid[y][x + i] = ship;
-      }
+    if (!ships.includes(ship)) {
+      ships.push(ship)
+    }
+
+    for (let i = 0; i < ship.length; i++){
+      const checkX = isVertical ? x : x + i;
+      const checkY = isVertical ? y + i : y;
+      grid[checkY][checkX] = ship;
     }
     return true;
   };
@@ -58,44 +59,52 @@ function Gameboard() {
     if (x < 0 || x > 9 || y < 0 || y > 9) {
       return "Invalid coordinates";
     }
-    const cellContent = grid[y][x];
-
-    if (cellContent === null) {
-      missedAttacks.push([x, y]);
-      return "Miss";
-    } else if (cellContent === "Hit" || cellContent === "Sunk") {
+  
+    const attackKey = `${x},${y}`;
+    if (missedAttacks.has(attackKey)) {
       return "Already attacked this position";
-    } else {
+    }
+  
+    const cellContent = grid[y][x];
+  
+    if (cellContent === null) {
+      missedAttacks.add(attackKey);
+      return "Miss";
+    }
+  
+    if (typeof cellContent === 'object' && cellContent.hit) {
       cellContent.hit();
-      grid[y][x] = "Hit";
-
+      
+      grid[y][x] = 'Hit';
+      
       if (cellContent.isSunk()) {
         for (let i = 0; i < 10; i++) {
           for (let j = 0; j < 10; j++) {
-            if (grid[i][j] === "Hit" && grid[i][j] === cellContent) {
-              grid[i][j] = "Sunk";
+            if (grid[i][j] === cellContent) {
+              grid[i][j] = 'Sunk';
             }
           }
         }
         return "Hit and Sunk";
       }
+      
       return "Hit";
     }
+  
+    return "Invalid attack";
+  };
+  
+  const getGrid = () => {
+    return grid.map(row => row.map(cell => {
+      if (cell === null) return ".";
+      if (cell === 'Hit') return "H";
+      if (cell === 'Sunk') return "X";
+      return "O";
+    }));
   };
 
   const allShipsSunk = () => {
     return ships.every((ship) => ship.isSunk());
-  };
-
-  const getGrid = () => {
-    return grid.map((row) =>
-      row.map((cell) => {
-        if (cell === null) return ".";
-        if (cell === "Hit") return "X";
-        if (cell === "Sunk") return "#";
-        return "O";
-      })
-    );
   };
 
   return {
