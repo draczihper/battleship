@@ -5,7 +5,10 @@ function UIController(playerBoard, computerBoard, attackCallback) {
 
 
     function renderBoard(board, boardElement, isPlayerBoard = true) {
-        board.innerHTML = "";
+        boardElement.innerHTML = "";
+        boardElement.className = "board"
+        boardElement.style.gridTemplateColumns = "repeat(10, 1fr)"
+        
         const gridData = board.getGrid();
 
         gridData.forEach((row, y) => {
