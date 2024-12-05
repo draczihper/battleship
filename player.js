@@ -8,8 +8,8 @@ function Player(type = "human") {
     const shipLengths = [5, 4, 3, 3, 2];
 
     const ships = shipLengths.map(Ship);
-    let placed = false
     ships.forEach(ship => {
+      let placed = false
       while (!placed) {
         const isVertical = Math.random() < 0.5;
         const x = Math.floor(Math.random() * 10)
