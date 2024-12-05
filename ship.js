@@ -23,7 +23,7 @@ function Gameboard() {
   const grid = Array(10)
     .fill(0)
     .map(() => Array(10).fill(null));
-  const missedAttacks = [];
+  const missedAttacks = new Set();
   const ships = [];
 
   const isValidPlacement = (x, y, length, isVertical) => {
