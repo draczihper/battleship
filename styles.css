@@ -1,0 +1,21 @@
+.game-container {
+    display: flex;
+    justify-content: space-around;
+}
+
+.board {
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+    gap: 2px;
+    width: 400px;
+    height: 400px;
+}
+
+.board-cell {
+    border: 1px solid #ccc;
+    cursor: pointer;
+}
+
+.board-cell.empty { background-color: lightblue; }
+.board-cell.ship { background-color: gray; }
+.board-cell.sunk { background-color: black; color: white; }
