@@ -14,8 +14,10 @@
 .board-cell {
     border: 1px solid #ccc;
     cursor: pointer;
+    transition: background-color 0.3s ease;
 }
 
 .board-cell.empty { background-color: lightblue; }
 .board-cell.ship { background-color: gray; }
-.board-cell.sunk { background-color: black; color: white; }
+.board-cell.hit { background-color: yellow; }
+.board-cell.sunk { background-color: red; color: white; } 
