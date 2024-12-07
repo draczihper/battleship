@@ -10,14 +10,36 @@
     width: 400px;
     height: 400px;
 }
-
 .board-cell {
     border: 1px solid #ccc;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    transition: all 0.3s ease;
+    position: relative;
 }
 
 .board-cell.empty { background-color: lightblue; }
 .board-cell.ship { background-color: gray; }
-.board-cell.hit { background-color: yellow; }
-.board-cell.sunk { background-color: red; color: white; } 
+.board-cell.hit { 
+    background-color: yellow;
+    animation: pulse 1s infinite alternate;
+}
+.board-cell.sunk { 
+    background-color: red; 
+    color: white;
+    position: relative;
+}
+
+.board-cell.sunk::after {
+    content: '✖';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 20px;
+    font-weight: bold;
+}
+
+@keyframes pulse {
+    from { transform: scale(1); }
+    to { transform: scale(1.05); }
+}
