@@ -26,6 +26,7 @@ function UIController(playerBoard, computerBoard, attackCallback) {
                         break;
                     case "H":
                         cellElement.classList.add("hit")
+                        break;
                     case "X":
                         cellElement.classList.add("sunk");
                         break;
