@@ -25,6 +25,7 @@ function Gameboard() {
     .map(() => Array(10).fill(null));
   const missedAttacks = new Set();
   const ships = [];
+  const shipPositions = new Map();
 
   const isValidPlacement = (x, y, length, isVertical) => {
     if (isVertical && y + length > 10) return false;
@@ -47,11 +48,14 @@ function Gameboard() {
       ships.push(ship)
     }
 
+    const shipPositionSet = new Set();
     for (let i = 0; i < ship.length; i++){
       const checkX = isVertical ? x : x + i;
       const checkY = isVertical ? y + i : y;
       grid[checkY][checkX] = ship;
+      shipPositionSet.add(`${checkX},${checkY}`)
     }
+    shipPositions.set(ship, shipPositionSet);
     return true;
   };
 
@@ -78,12 +82,10 @@ function Gameboard() {
       grid[y][x] = 'Hit';
       
       if (cellContent.isSunk()) {
-        for (let i = 0; i < 10; i++) {
-          for (let j = 0; j < 10; j++) {
-            if (grid[i][j] === cellContent) {
-              grid[i][j] = 'Sunk';
-            }
-          }
+        const shipPos = shipPositions.get(cellContent);
+        for (let pos of shipPos){
+          const [posX, posY] = pos.split(",").map(Number)
+          grid[posX, posY] = "Sunk"
         }
         return "Hit and Sunk";
       }
