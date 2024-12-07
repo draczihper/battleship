@@ -85,7 +85,7 @@ function Gameboard() {
         const shipPos = shipPositions.get(cellContent);
         for (let pos of shipPos){
           const [posX, posY] = pos.split(",").map(Number)
-          grid[posX, posY] = "Sunk"
+          grid[posY] [posX] = "Sunk"
         }
         return "Hit and Sunk";
       }
