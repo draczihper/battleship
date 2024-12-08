@@ -29,14 +29,20 @@ function Player(type = "human") {
   const makeRandomAttack = (enemyBoard) => {
     const previousHits = [];
     const adjacentOffsets = [
-      [1, 0], [0, -1], [-1, 0], [0, 1]
+      [1, 0], [0, -1], [0, 1], [-1, 0]
     ];
 
     if(previousHits.length > 0){
       const lastHit = previousHits[previousHits.length - 1]
       for (let [dx, dy] of adjacentOffsets){
         const x = lastHit.x + dx;
-        const y = lastHit.y + dy
+        const y = lastHit.y + dy;
+
+        if(x >= 0 && x < 10 && y >= 0  && y < 10){
+          if(!Array.from(enemyBoard.missedAttacks).some(key => key === `${x},${y}`)){
+            return { x, y, result: enemyBoard.receiveAttack(x, y)}
+          }
+        }
       }
     }
     let x, y;
