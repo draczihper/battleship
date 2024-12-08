@@ -23,6 +23,12 @@
     background-color: yellow;
     animation: pulse 1s infinite alternate;
 }
+
+.board-cell.disabled {
+    /* pointer-events: none; */
+    opacity: 0.5;
+}
+
 .board-cell.sunk { 
     background-color: red; 
     color: white;
