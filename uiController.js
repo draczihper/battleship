@@ -26,16 +26,24 @@ function UIController(playerBoard, computerBoard, attackCallback) {
                         break;
                     case "H":
                         cellElement.classList.add("hit")
+                        cellElement.classList.add("disabled")
                         break;
                     case "X":
                         cellElement.classList.add("sunk");
+                        cellElement.classList.add("disabled")
                         break;
                 }
 
                 if (!isPlayerBoard) {
                     cellElement.dataset.x = x;
                     cellElement.dataset.y = y;
-                    cellElement.addEventListener("click", () => attackCallback(x, y));
+
+                    if(!cellElement.classList.contains("disabled")){
+                        cellElement.addEventListener("click", () => attackCallback(x, y));
+                    } else {
+                        cellElement.style.opacity = 0.5;
+                        cellElement.style.cursor = "not-allowed"
+                    }
                 }
 
                 boardElement.appendChild(cellElement)
