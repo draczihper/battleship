@@ -22,6 +22,8 @@ function GameController() {
     }
 
     function handleComputerTurn() {
+        if (gameOver) return;
+
         const attackResult = computer.makeRandomAttack(playerOne.gameboard)
         uiController.updatePlayerBoard();
 
@@ -48,6 +50,7 @@ function GameController() {
             uiController.displayGameOver(
                 attackedPlayer === computer ? "Player Wins!" : "Computer Wins!"
             );
+            uiController.renderBoards();
         }
     }
 
