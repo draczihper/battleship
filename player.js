@@ -27,6 +27,18 @@ function Player(type = "human") {
   };
 
   const makeRandomAttack = (enemyBoard) => {
+    const previousHits = [];
+    const adjacentOffsets = [
+      [1, 0], [0, -1], [-1, 0], [0, 1]
+    ];
+
+    if(previousHits.length > 0){
+      const lastHit = previousHits[previousHits.length - 1]
+      for (let [dx, dy] of adjacentOffsets){
+        const x = lastHit.x + dx;
+        const y = lastHit.y + dy
+      }
+    }
     let x, y;
     do {
       x = Math.floor(Math.random() * 10);
